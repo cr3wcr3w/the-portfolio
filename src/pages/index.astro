@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../components/layouts/index.astro";
 import Footer from "../components/footer/index.astro";
-import { ExpList, EduList } from "../components/index";
+import { EduList } from "../components/index";
 import ProfilePic from "../../public/profile.webp";
 
 const messages = [
@@ -89,10 +89,10 @@ const messages = [
         </ul>
       </div>
     </section>
-    <section class="mb-16">
+    <!-- <section class="mb-16">
       <h2 class="mb-4 text-2xl">Work</h2>
       <ExpList client:idle />
-    </section>
+    </section> -->
     <section class="mb-16">
       <h2 class="mb-4 text-2xl">Education / Certification</h2>
       <EduList client:idle />

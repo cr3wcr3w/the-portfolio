@@ -2,6 +2,7 @@ import { For } from "solid-js";
 import { Loading } from "./loading";
 import { Error } from "./error"
 import { FetchGist } from "../../hooks"
+import { itemsPerPage } from '../../constant/variable'
 
 type GistType = {
   filename: string;
@@ -12,7 +13,21 @@ type GistType = {
 
 export function GistList() {
 
-  const { data, isError, isLoading } = FetchGist()
+  const { data, isError, isLoading, currentPage, setCurrentPage, loadGists, totalData } = FetchGist();
+
+    const prev = () => {
+        if (currentPage() > 0) {
+            setCurrentPage(currentPage() - 1);
+            loadGists(currentPage() - 1);
+        }
+    };
+
+    const next = () => {
+      if (currentPage() * itemsPerPage < totalData()) {
+        setCurrentPage(currentPage() + 1);
+        loadGists(currentPage() + 1);
+      }
+    };
 
   return (
     <section class="mb-12">
@@ -41,15 +56,16 @@ export function GistList() {
         </For>}
 
       {isError() && !isLoading() && <Error />}
-      <div class="flex items-center gap-1">
-        <a
-          class="inline text-slate-400 transition duration-300 ease-out hover:text-cyan-600 hover:underline"
-          href="https://gist.github.com/K3ndev"
-          target="_blank"
-        >
-          View all Gist
+      <div class="flex justify-between">
+        <button onClick={prev} class="text-slate-400 transition duration-300 ease-out hover:text-cyan-600 hover:underline">
+          <svg class="inline rotate-180" fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="1em" width="1em" style="overflow: visible;"><path d="M869 487.8 491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-.7 5.2-2L869 536.2a32.07 32.07 0 0 0 0-48.4z"></path></svg>
+          Prev
+        </button>
+        <p class="text-slate-400">{currentPage() + 1}</p>
+        <button onClick={next} class="text-slate-400 transition duration-300 ease-out hover:text-cyan-600 hover:underline">
+          Next
           <svg class="inline" fill="currentColor" stroke-width="0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" height="1em" width="1em" style="overflow: visible;"><path d="M869 487.8 491.2 159.9c-2.9-2.5-6.6-3.9-10.5-3.9h-88.5c-7.4 0-10.8 9.2-5.2 14l350.2 304H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h585.1L386.9 854c-5.6 4.9-2.2 14 5.2 14h91.5c1.9 0 3.8-.7 5.2-2L869 536.2a32.07 32.07 0 0 0 0-48.4z"></path></svg>
-        </a>
+        </button>
       </div>
     </section>
   );

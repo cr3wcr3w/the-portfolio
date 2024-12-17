@@ -1,23 +1,16 @@
-import { notFound } from 'next/navigation'
-import RenderBlocks from '../shared/helper/render-blocks'
 import type { Page } from '@/../src/payload-types'
+import RenderBlocks from './shared/helper/render-blocks'
 
 type PageDataType = {
   docs: Page[]
 }
 
-export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
-  const slug = (await params).slug
-
+async function Page() {
   const websiteUrl = process.env.WEBSITE_URL
-
   const data = await fetch(`${websiteUrl}/api/pages?limit=100`)
   const page: PageDataType = await data.json()
 
-  const matchingPage = page.docs?.find((doc) => doc.slug === slug)
-  if (!matchingPage || matchingPage.slug === 'index') {
-    notFound()
-  }
+  const matchingPage = page.docs?.find((doc) => doc.slug === 'index')
 
   return (
     <div>
@@ -26,3 +19,5 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     </div>
   )
 }
+
+export default Page

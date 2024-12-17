@@ -1,47 +1,30 @@
-# Astro Starter Kit: Minimal
+# Portfolio Website
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Welcome to my personal portfolio website built with the latest web technologies! This site showcases my skills, projects, and experience. Below is an overview of the tech stack, how to set up the project locally, and how to deploy it.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+## Tech Stack
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+This portfolio website is built with the following technologies:
 
-## 🚀 Project Structure
+- **React.js**: A popular JavaScript library for building user interfaces.
+- **Next.js**: A React framework for building static and dynamic websites with server-side rendering, static site generation, and API routes.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **GSAP (GreenSock Animation Platform)**: A powerful JavaScript library for creating high-performance animations.
+- **Payload CMS**: A headless CMS to manage the content of the website.
+- **ShadCN UI**: A component library for building modern UI components with React.
+- **Node.js**: JavaScript runtime for building server-side applications.
+- **Playwright**: A Node library for browser automation for testing purposes.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Features
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Dynamic Content**: The content is fetched dynamically from Payload CMS, allowing easy updates.
+- **Animations**: Interactive animations using GSAP to enhance the user experience.
+- **Responsive Design**: Fully responsive layout with Tailwind CSS, ensuring the portfolio looks great on all devices.
+- **Testing**: Playwright is used to run automated browser tests to ensure everything works correctly.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Prerequisites
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Make sure you have the following installed before getting started:
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- **Node.js** (v14 or higher) - [Download Node.js](https://nodejs.org/)
+- **Yarn** or **npm** - Package manager for JavaScript (optional: if you're using npm, you can skip installing Yarn)

@@ -7,7 +7,7 @@ type PageDataType = {
 
 async function Page() {
   const websiteUrl = process.env.WEBSITE_URL
-  const data = await fetch(`${websiteUrl}/api/pages?limit=100`)
+  const data = await fetch(`${websiteUrl}/api/pages?limit=100`, { cache: 'no-store' })
   const page: PageDataType = await data.json()
 
   const matchingPage = page.docs?.find((doc) => doc.slug === 'index')

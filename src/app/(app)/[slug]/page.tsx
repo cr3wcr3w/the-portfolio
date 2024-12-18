@@ -1,18 +1,15 @@
 import { notFound } from 'next/navigation'
 import RenderBlocks from '../shared/helper/render-blocks'
 import type { Page } from '@/../src/payload-types'
-
-type PageDataType = {
-  docs: Page[]
-}
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const slug = (await params).slug
-
-  const websiteUrl = process.env.WEBSITE_URL
-
-  const data = await fetch(`${websiteUrl}/api/pages?limit=100`)
-  const page: PageDataType = await data.json()
+  const payload = await getPayload({ config })
+  const page = await payload.find({
+    collection: 'pages',
+  })
 
   const matchingPage = page.docs?.find((doc) => doc.slug === slug)
   if (!matchingPage || matchingPage.slug === 'index') {

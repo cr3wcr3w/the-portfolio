@@ -1,14 +1,13 @@
 import type { Page } from '@/../src/payload-types'
 import RenderBlocks from './shared/helper/render-blocks'
-
-type PageDataType = {
-  docs: Page[]
-}
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 async function Page() {
-  const websiteUrl = process.env.WEBSITE_URL
-  const data = await fetch(`${websiteUrl}/api/pages?limit=100`, { cache: 'no-store' })
-  const page: PageDataType = await data.json()
+  const payload = await getPayload({ config })
+  const page = await payload.find({
+    collection: 'pages',
+  })
 
   const matchingPage = page.docs?.find((doc) => doc.slug === 'index')
 

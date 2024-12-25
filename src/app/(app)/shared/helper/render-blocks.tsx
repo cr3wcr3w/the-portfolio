@@ -8,7 +8,7 @@ type LayoutProps = {
 
 const RenderBlocks = ({ layout }: LayoutProps) => {
   return (
-    <div>
+    <>
       {layout?.map((block, i) => {
         switch (block.blockType) {
           case 'hero': {
@@ -31,7 +31,7 @@ const RenderBlocks = ({ layout }: LayoutProps) => {
             return null
         }
       })}
-    </div>
+    </>
   )
 }
 

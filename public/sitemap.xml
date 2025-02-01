@@ -13,12 +13,7 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://cr3wcr3w.vercel.app/gists/</loc>
-  <lastmod>2024-10-7T02:57:01+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://cr3wcr3w.vercel.app/writeups/</loc>
+  <loc>https://cr3wcr3w.vercel.app/blogs/</loc>
   <lastmod>2024-10-7T02:57:01+00:00</lastmod>
   <priority>0.80</priority>
 </url>

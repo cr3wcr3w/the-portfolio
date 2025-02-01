@@ -22,7 +22,7 @@ function Navigation() {
           <li>
             <Link
               to="/blogs"
-              id="gists"
+              id="blogs"
               className="[&.active]:text-slate-100 cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2"
             >
               Blogs

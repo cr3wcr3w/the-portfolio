@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Allow: /gists/
-Allow: /guestBook/
+Allow: /blogs/
 Sitemap: https://astro-k3ndev.vercel.app/sitemap.xml

@@ -1,0 +1,46 @@
+#stars {
+  width: 1.5px;
+  height: 1.5px;
+  background: transparent;
+  border-radius: 100%;
+  animation: blink 2s infinite;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#stars2 {
+  width: 1.2px;
+  height: 1.2px;
+  background: transparent;
+  border-radius: 100%;
+  animation: blink 4s infinite;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#stars3 {
+  width: 1.1px;
+  height: 1.1px;
+  background: transparent;
+  border-radius: 100%;
+  animation: blink 3s infinite;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

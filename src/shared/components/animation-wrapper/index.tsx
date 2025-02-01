@@ -1,5 +1,6 @@
 import Lenis from "lenis";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { LoadingMessage } from "../loading-animation";
 import "./index.css";
 
 type AnimationWrapperProps = {
@@ -7,6 +8,8 @@ type AnimationWrapperProps = {
 };
 
 function AnimationWrapper({ children }: AnimationWrapperProps) {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const lenis = new Lenis();
     function raf(time: number) {
@@ -40,15 +43,32 @@ function AnimationWrapper({ children }: AnimationWrapperProps) {
     starsElement4!.style.boxShadow = generateStart(500);
   }, []);
 
+  const setLoadingDone = () => {
+    setIsLoading(false);
+  };
+
   return (
     <>
       <div id="stars1"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
       <div id="stars4"></div>
-      <div className="grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-[100dvh]">
-        {children}
-      </div>
+
+      {isLoading ? (
+        <LoadingMessage
+          introText={"Imagine a world where functionality drives experience."}
+          mainText={
+            "I build dynamic, interactive websites using modern web technologies."
+          }
+          closingText={"Every line of code builds something extraordinary."}
+          sloganText={"Focused. Passionate. Efficient."}
+          setLoadingDone={setLoadingDone}
+        />
+      ) : (
+        <div className="grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-[100dvh]">
+          {children}
+        </div>
+      )}
     </>
   );
 }

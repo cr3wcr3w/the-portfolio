@@ -10,19 +10,19 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-
-
   async function getFetchBlog() {
-    const { data } = await supabase.schema('blogs_schema').from("blogs_posts").select();
+    const { data } = await supabase
+      .schema("blogs_schema")
+      .from("blogs_posts")
+      .select();
 
-    console.log(data)
-    console.log('hi')
+    console.log(data);
+    console.log("hi");
   }
 
   useEffect(() => {
     getFetchBlog();
   }, []);
-
 
   return (
     <main className="container mx-auto max-w-2xl flex-1 px-6">

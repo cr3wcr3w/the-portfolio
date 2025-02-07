@@ -63,3 +63,6 @@ TO authenticated
 USING (
   (auth.jwt()->>'email') = 'racelisjk@gmail.com'
 );
+
+
+-- instead of checking if the email is mine, just create an team table then chuchu

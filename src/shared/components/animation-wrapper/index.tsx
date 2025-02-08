@@ -2,6 +2,7 @@ import Lenis from "lenis";
 import { useEffect, useState } from "react";
 import { LoadingMessage } from "../loading-animation";
 import "./index.css";
+import { useLocation } from "@tanstack/react-router";
 
 type AnimationWrapperProps = {
   children: React.ReactNode;
@@ -9,6 +10,7 @@ type AnimationWrapperProps = {
 
 function AnimationWrapper({ children }: AnimationWrapperProps) {
   const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
 
   useEffect(() => {
     const lenis = new Lenis();
@@ -54,7 +56,7 @@ function AnimationWrapper({ children }: AnimationWrapperProps) {
       <div id="stars3"></div>
       <div id="stars4"></div>
 
-      {isLoading ? (
+      {location.pathname === "/" && isLoading ? (
         <LoadingMessage
           introText={"Imagine a world where functionality drives experience."}
           mainText={

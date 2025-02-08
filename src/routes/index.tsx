@@ -3,7 +3,6 @@ import InfiniteMessage from "../features/home/components/infinite-messages";
 import { EduList } from "../features/home/components/education";
 import Hero from "../features/home/components/hero";
 import Contact from "../features/home/components/contact";
-
 export const Route = createFileRoute("/")({
   component: Index,
 });

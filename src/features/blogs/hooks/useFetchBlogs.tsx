@@ -47,7 +47,9 @@ export function useBlogs({
         setBlogs(data as unknown as BlogsType[]);
       }
 
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
     }
 
     async function fetchTotalCount() {

@@ -42,7 +42,9 @@ export function useBlog({ blogId }: { blogId: number }) {
         setBlog(data as unknown as BlogType);
       }
 
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 300);
     }
 
     fetchBlog();

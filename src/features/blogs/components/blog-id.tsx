@@ -1,5 +1,8 @@
 import { useBlog } from "../hooks/useFetchBlogById";
 import { BlogIdLoading } from "./blog-id-loading";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 function BlogId({ id }: { id: string }) {
   const { blog, isError, isLoading } = useBlog({ blogId: +id });
@@ -23,8 +26,14 @@ function BlogId({ id }: { id: string }) {
               #{blog.blogs_tags.name}
             </p>
           </div>
-          <div className="mb-3 min-h-[600px] flex flex-col gap-2 bg-slate-800 p-3 md:gap-3">
-            <p>{blog.markdown}</p>
+          <div className="mb-3 min-h-[600px] flex flex-col gap-2 bg-gray-400 p-3 md:gap-3">
+            <Markdown
+              className="prose"
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+            >
+              {blog.markdown}
+            </Markdown>
           </div>
         </>
       )}

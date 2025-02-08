@@ -36,6 +36,7 @@ export function useBlogs({
         .select(
           "id, inserted_at, title, markdown, description, blogs_tags(id, name)",
         )
+        .order("id", { ascending: true })
         .range((page - 1) * pageSize, page * pageSize - 1);
 
       if (error) {

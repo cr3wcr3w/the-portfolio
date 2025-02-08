@@ -28,7 +28,7 @@ function BlogId({ id }: { id: string }) {
           </div>
           <div className="mb-3 min-h-[600px] flex flex-col gap-2 bg-gray-400 p-3 md:gap-3">
             <Markdown
-              className="prose"
+              className="prose prose-sm prose-slate-800"
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
             >

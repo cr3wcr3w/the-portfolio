@@ -3,17 +3,22 @@ import { BlogIdLoading } from "./blog-id-loading";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import NotFound from "../../../shared/components/not-found/not-found";
 
 function BlogId({ id }: { id: string }) {
   const { blog, isError, isLoading } = useBlog({ blogId: +id });
 
   if (isError) {
     return (
-      <p className="text-center text-2xl text-slate-400">
-        Error loading blogs. Please try again later.
-      </p>
+      <section>
+        <p className="text-center text-2xl text-slate-400">
+          Error loading blogs. Please try again later.
+        </p>
+      </section>
     );
   }
+
+  if (!isLoading && !blog) return <NotFound />;
 
   return (
     <section>

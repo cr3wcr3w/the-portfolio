@@ -5,7 +5,7 @@ function Contact() {
         Get in Touch
       </h3>
       <p className="text-slate-400">
-        If you want to work together, Don't hesitate to contact me.
+        If you want to work together, Don&apos;t hesitate to contact me.
       </p>
       <a
         className="mb-4 inline-block text-slate-400 underline transition duration-300 ease-out hover:text-white"

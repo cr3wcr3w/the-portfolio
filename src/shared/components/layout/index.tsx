@@ -1,17 +1,20 @@
 import Lenis from "lenis";
-import { useEffect, useState } from "react";
-import { LoadingMessage } from "../loading-animation";
-import "./index.css";
-import { useLocation } from "@tanstack/react-router";
+import React, { useEffect, useState } from "react";
+import { LoadingMessage } from "../loading-message";
+import Header from "../header";
+import { useSessionStorage } from "usehooks-ts";
+import Footer from "../footer";
 
-type AnimationWrapperProps = {
-  children: React.ReactNode;
-};
+function Layout({ children }: { children: React.ReactNode }) {
+  const [isLoadingStatus, setIsLoadingStatus] = useSessionStorage(
+    "global-loading-status",
+    false,
+  );
+  const [isLoadingRendered, setIsLoadingRendered] = useState<boolean | null>(
+    null,
+  );
 
-function AnimationWrapper({ children }: AnimationWrapperProps) {
-  const [isLoading, setIsLoading] = useState(true);
-  const location = useLocation();
-
+  // stars
   useEffect(() => {
     const lenis = new Lenis();
     function raf(time: number) {
@@ -45,18 +48,30 @@ function AnimationWrapper({ children }: AnimationWrapperProps) {
     starsElement4!.style.boxShadow = generateStart(500);
   }, []);
 
-  const setLoadingDone = () => {
-    setIsLoading(false);
+  const toggleIsFirstRender = () => {
+    setIsLoadingStatus(true);
+    setIsLoadingRendered(true);
   };
 
+  // for checking loading status
+  useEffect(() => {
+    if (window) {
+      if (isLoadingStatus === false) {
+        setIsLoadingRendered(false);
+      } else {
+        setIsLoadingRendered(true);
+      }
+    }
+  }, []);
+
   return (
-    <>
+    <div>
       <div id="stars1"></div>
       <div id="stars2"></div>
       <div id="stars3"></div>
       <div id="stars4"></div>
 
-      {location.pathname === "/" && isLoading ? (
+      {!isLoadingRendered === true ? (
         <LoadingMessage
           introText={"Imagine a world where functionality drives experience."}
           mainText={
@@ -64,15 +79,19 @@ function AnimationWrapper({ children }: AnimationWrapperProps) {
           }
           closingText={"Every line of code builds something extraordinary."}
           sloganText={"Focused. Passionate. Efficient."}
-          setLoadingDone={setLoadingDone}
+          toggleIsFirstRender={toggleIsFirstRender}
         />
       ) : (
         <div className="grid grid-rows-[auto_1fr_auto] grid-cols-1 min-h-[100dvh]">
-          {children}
+          <Header />
+          <main className="container mx-auto max-w-2xl flex-1 px-6">
+            {children}
+          </main>
+          <Footer />
         </div>
       )}
-    </>
+    </div>
   );
 }
 
-export default AnimationWrapper;
+export default Layout;

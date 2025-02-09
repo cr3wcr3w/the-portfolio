@@ -1,4 +1,4 @@
-import "./index.css";
+import styles from "./message.module.css";
 
 const messages = [
   {
@@ -36,8 +36,8 @@ const messages = [
 function InfiniteMessage() {
   return (
     <section className="mb-16">
-      <div className="scroller" data-speed="slow" data-animated="true">
-        <ul className="scroller__inner">
+      <div className={styles.scroller} data-speed="slow" data-animated="true">
+        <ul className={styles.scroller__inner}>
           {messages.map((tech, index) => (
             <li key={index}>
               <p className="text-lg text-slate-400 hover:text-slate-100">

@@ -7,13 +7,13 @@ export const LoadingMessage = ({
   mainText,
   closingText,
   sloganText,
-  setLoadingDone,
+  toggleIsFirstRender,
 }: {
   introText: string;
   mainText: string;
   closingText: string;
   sloganText: string;
-  setLoadingDone: () => void;
+  toggleIsFirstRender: () => void;
 }) => {
   const wordsRefIntro = useRef<HTMLSpanElement[]>([]);
   const wordsRefMain = useRef<HTMLSpanElement[]>([]);
@@ -73,7 +73,7 @@ export const LoadingMessage = ({
                 stagger: 0.1,
                 ease: "power2.in",
                 onComplete: () => {
-                  setLoadingDone();
+                  toggleIsFirstRender();
                 },
               });
             }, 1000);

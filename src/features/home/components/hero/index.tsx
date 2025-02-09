@@ -1,15 +1,15 @@
-import ProfilePic from "/profile.webp";
+import Image from "next/image";
 
 function Hero() {
   return (
     <section className="mb-16 flex flex-col gap-8 md:flex-row-reverse md:gap-14">
       <div className="z-50 w-[100px] md:w-[300px]">
-        <img
-          src={ProfilePic}
+        <Image
+          src="/profile.webp"
           alt="profile_pic"
           className="aspect-square"
-          width="200"
-          height="200"
+          width={200}
+          height={200}
         />
       </div>
 
@@ -21,7 +21,7 @@ function Hero() {
             Aspiring Security Researcher
           </p>  */}
         <p className="text-slate-400 text-pretty">
-          At present, I'm working towards honing my skills on Frontend
+          At present, I&apos;m working towards honing my skills on Frontend
           Development.
         </p>
       </div>

@@ -1,15 +1,21 @@
-import { Link } from "@tanstack/react-router";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-function Navigation() {
+function Header() {
+  const router = useRouter();
+  const isActive = (path: string) => router.pathname === path;
+
   return (
     <header className="container mx-auto max-w-2xl px-4">
       <nav className="text-md mb-20 mt-8 flex w-full items-center justify-between ">
         <ul className="flex gap-2 text-slate-400">
           <li>
             <Link
-              to="/"
-              id="home"
-              className="[&.active]:text-slate-100 cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2"
+              href="/"
+              id="/"
+              className={`${
+                isActive("/") ? "text-slate-50" : ""
+              } cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2`}
             >
               Home
             </Link>
@@ -21,9 +27,11 @@ function Navigation() {
           </li>
           <li>
             <Link
-              to="/blogs"
+              href="/blogs"
               id="blogs"
-              className="[&.active]:text-slate-100 cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2"
+              className={`${
+                isActive("/blogs") ? "text-slate-50" : ""
+              } ${isActive("/blogs/[slug]") ? "text-slate-50" : ""} cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2`}
             >
               Blogs
             </Link>
@@ -35,7 +43,7 @@ function Navigation() {
             className="block cursor-pointer rounded-lg border border-slate-700 bg-slate-700 p-2 transition duration-300 ease-out hover:border hover:border-slate-400"
             href="https://gist.github.com/cr3wcr3w"
             target="_blank"
-            aria-label="Benchmark K3ndev Personal web site projects"
+            aria-label="My Personal Gist Github"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -63,4 +71,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default Header;

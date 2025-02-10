@@ -91,10 +91,10 @@
   }
 }
 
-::view-transition-old(root) {
+::view-transition-old(image) {
   animation-duration: 0.4s ease-in both move-out;
 }
 
-::view-transition-new(root) {
+::view-transition-new(image) {
   animation-duration: 0.4s ease-in both move-in;
 }

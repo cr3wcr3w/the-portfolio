@@ -55,7 +55,7 @@ function Hero() {
       >
         <div className="flex justify-center items-center h-full flex-col">
           <div
-            className="h-40 w-40 lg:h-80 lg:w-80 xl:h-90 xl:w-90"
+            className="h-40 w-40 md:h-90 md:w-90 lg:h-[25rem] lg:w-[25rem] xl:h-[26rem] xl:w-[26rem]"
             ref={modalContentWrapperRef}
           >
             {/* append here */}
@@ -64,12 +64,16 @@ function Hero() {
       </section>
 
       {/* hero section */}
-      <section className="mb-16 flex flex-col gap-8 md:flex-row-reverse md:gap-14">
-        <div className="w-[120px] md:w-[300px]" ref={heroParentRef}>
+      <section className="mb-16 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-11">
+        {/* w-[120px] h-[120px] md:h-[167px] md:w-[167px] */}
+        <div
+          className="w-[130px] h-[130px] md:h-[167px] md:w-[167px]"
+          ref={heroParentRef}
+        >
           <Image
             src="/profile.webp"
             alt="profile_pic"
-            className="aspect-square w-full cursor-zoom-in"
+            className="w-full cursor-zoom-in select-none"
             width={200}
             height={200}
             ref={heroImageRef}
@@ -78,16 +82,16 @@ function Hero() {
           />
         </div>
 
-        <div>
-          <h1 className="playfair-font text-4xl font-bold text-white md:text-5xl mb-4">
+        <div className="md:col-span-2 md:order-first">
+          <h1 className="playfair-font text-4xl font-bold text-white md:text-5xl mb-1 ">
             Kenneth Racelis
           </h1>
-          {/* <p className="mb-4 text-lg text-slate-200 md:text-xl">
-            Aspiring Security Researcher
-          </p>  */}
-          <p className="text-slate-400 text-pretty">
+          <p className="mb-4 text-lg text-slate-200 md:text-xl">
+            Frontend Developer
+          </p>
+          <p className="text-slate-400 text-pretty ">
             At present, I&apos;m working towards honing my skills on Frontend
-            Development.
+            Development (react, react-native).
           </p>
         </div>
       </section>

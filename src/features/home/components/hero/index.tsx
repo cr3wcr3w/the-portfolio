@@ -1,9 +1,11 @@
 import Image from "next/image";
 import { useState, useRef } from "react";
 import confetti from "canvas-confetti";
+import { mouseEnterAnimationHandler } from "../../helper/stars-animation";
 
 function Hero() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isGoUpAnimated, setIsGoUpAnimated] = useState(false);
   const heroParentRef = useRef<HTMLImageElement>(null);
   const heroImageRef = useRef<HTMLImageElement | null>(null);
 
@@ -46,6 +48,12 @@ function Hero() {
     });
   };
 
+  const moveStarHandler = () => {
+    setIsGoUpAnimated(true);
+    if (isGoUpAnimated) return;
+    mouseEnterAnimationHandler({});
+  };
+
   return (
     <>
       {/* modal */}
@@ -79,6 +87,7 @@ function Hero() {
             ref={heroImageRef}
             onClick={clickHandler}
             style={{ viewTransitionName: "image" }}
+            onMouseEnter={moveStarHandler}
           />
         </div>
 

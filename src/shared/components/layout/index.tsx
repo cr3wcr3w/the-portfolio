@@ -4,6 +4,7 @@ import { LoadingMessage } from "../loading-message";
 import Header from "../header";
 import { useSessionStorage } from "usehooks-ts";
 import Footer from "../footer";
+import { mouseEnterAnimationHandler } from "@/features/home/helper/stars-animation";
 
 function Layout({ children }: { children: React.ReactNode }) {
   const [isLoadingStatus, setIsLoadingStatus] = useSessionStorage(
@@ -57,6 +58,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (window) {
       if (isLoadingStatus === false) {
+        mouseEnterAnimationHandler({ sec: 10 });
         setIsLoadingRendered(false);
       } else {
         setIsLoadingRendered(true);
@@ -66,12 +68,12 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
-      <div id="stars1"></div>
-      <div id="stars2"></div>
-      <div id="stars3"></div>
-      <div id="stars4"></div>
+      <div id="stars1" />
+      <div id="stars2" />
+      <div id="stars3" />
+      <div id="stars4" />
 
-      {!isLoadingRendered === true ? (
+      {!isLoadingRendered ? (
         <LoadingMessage
           introText={"Imagine a world where functionality drives experience."}
           mainText={

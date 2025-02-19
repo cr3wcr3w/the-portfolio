@@ -4,7 +4,6 @@ on:
     branches:
      - '**'
 
-
 jobs:
   format:
     runs-on: ubuntu-latest
@@ -19,7 +18,7 @@ jobs:
       - run: npm ci
 
       - name: Run Prettier
-        run: npm run prettier
+        run: npm run prettier:check
 
       - name: Run ESLint
         run: npm run lint

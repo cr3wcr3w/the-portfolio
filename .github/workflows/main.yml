@@ -1,6 +1,6 @@
 name: Lint and Prettier Check
 on:
-  pull_request:
+  push:
     branches:
       - main
 

@@ -1,0 +1,24 @@
+name: Lint and Prettier Check
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    container:
+      image: node:22
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm ci
+
+      - name: Run Prettier
+        run: npm run prettier
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Build
+        run: npm run build

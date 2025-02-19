@@ -9,6 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:22
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
 
     steps:
       - uses: actions/checkout@v3

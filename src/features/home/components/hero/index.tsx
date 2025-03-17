@@ -99,8 +99,8 @@ function Hero() {
             Frontend Developer
           </p>
           <p className="text-slate-400 text-pretty ">
-            At present, I&apos;m working towards honing my skills on Frontend
-            Development (react, react-native).
+            I&apos;m into coding and learning piano, Always learning something
+            new; currently exploring electron.
           </p>
         </div>
       </section>

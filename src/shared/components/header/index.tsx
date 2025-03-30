@@ -20,22 +20,11 @@ function Header() {
               Home
             </Link>
           </li>
-          <li>
+          {/* <li>
             <span className="text-slate-400" aria-label="Separator">
               /
             </span>
-          </li>
-          <li>
-            <Link
-              href="/blogs"
-              id="blogs"
-              className={`${
-                isActive("/blogs") ? "text-slate-50" : ""
-              } ${isActive("/blogs/[slug]") ? "text-slate-50" : ""} cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2`}
-            >
-              Blogs
-            </Link>
-          </li>
+          </li> */}
         </ul>
 
         <div>

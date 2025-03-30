@@ -99,8 +99,7 @@ function Hero() {
             Frontend Developer
           </p>
           <p className="text-slate-400 text-pretty ">
-            I&apos;m into coding and learning piano, Always learning something
-            new; currently exploring electron.
+            I&apos;m into coding, Always learning something new.
           </p>
         </div>
       </section>

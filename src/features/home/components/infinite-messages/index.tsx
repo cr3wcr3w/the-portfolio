@@ -2,34 +2,43 @@ import styles from "./message.module.css";
 
 const messages = [
   {
-    text: "Whispers... Watching?",
+    text: "typecsript",
   },
   {
-    text: "Whispers... Watching?",
+    text: "react",
   },
   {
-    text: "Whispers... Watching?",
+    text: "next",
   },
   {
-    text: "Whispers... Watching?",
+    text: "tailwind",
   },
   {
-    text: "Whispers... Watching?",
+    text: "gsap",
   },
   {
-    text: "Whispers... Watching?",
+    text: "express",
   },
   {
-    text: "Whispers... Watching?",
+    text: "hono",
   },
   {
-    text: "Whispers... Watching?",
+    text: "drizzle",
   },
   {
-    text: "Whispers... Watching?",
+    text: "postgres",
   },
   {
-    text: "Whispers... Watching?",
+    text: "docker",
+  },
+  {
+    text: "digitalOcean",
+  },
+  {
+    text: "linux",
+  },
+  {
+    text: "postman",
   },
 ];
 

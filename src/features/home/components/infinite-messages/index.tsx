@@ -32,6 +32,9 @@ const messages = [
     text: "docker",
   },
   {
+    text: "terraform",
+  },
+  {
     text: "digitalOcean",
   },
   {

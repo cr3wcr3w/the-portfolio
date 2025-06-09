@@ -30,6 +30,9 @@ const mockEduData = [
 export function EduList() {
   return (
     <section className="mb-12">
+      <h2 className="mb-4 text-xl text-slate-200 md:text-2xl">
+        Education / Certification
+      </h2>
       {/* card */}
       {mockEduData.map((item: mockEduDataType, index) => (
         <div

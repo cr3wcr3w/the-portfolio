@@ -84,6 +84,7 @@ function Hero() {
             className="w-full cursor-zoom-in select-none"
             width={200}
             height={200}
+            priority
             ref={heroImageRef}
             onClick={clickHandler}
             style={{ viewTransitionName: "image" }}

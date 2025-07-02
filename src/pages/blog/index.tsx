@@ -1,9 +1,9 @@
 import fs from "fs";
 import path from "path";
-import Link from "next/link";
 import matter from "gray-matter";
 import Layout from "@/shared/components/layout";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 type BlogMeta = {
   tags: string[];
@@ -13,7 +13,8 @@ type BlogMeta = {
   slug: string;
 };
 
-export default function Home({ posts }: { posts: BlogMeta[] }) {
+export default function Blog({ posts }: { posts: BlogMeta[] }) {
+  const router = useRouter();
   const [search, setSearch] = useState("");
   const filtered = search
     ? posts.filter((post) =>
@@ -22,6 +23,17 @@ export default function Home({ posts }: { posts: BlogMeta[] }) {
         ),
       )
     : posts;
+
+  const handleViewTransition = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    if (document.startViewTransition) {
+      document.startViewTransition(() => {
+        router.push(href);
+      });
+    } else {
+      router.push(href);
+    }
+  };
 
   return (
     <Layout>
@@ -62,9 +74,15 @@ export default function Home({ posts }: { posts: BlogMeta[] }) {
               </div>
               <div>
                 <div className="text-base text-white md:text-lg font-semibold">
-                  <Link href={`/blog/${item.slug}`}>
-                    {item.slug.replace(/-/g, " ")}
-                  </Link>
+                  <a
+                    href={`/blog/${item.slug}`}
+                    onClick={(e) =>
+                      handleViewTransition(e, `/blog/${item.slug}`)
+                    }
+                    className="cursor-pointer"
+                  >
+                    {item.title.replace(/-/g, " ")}
+                  </a>
                 </div>
 
                 <div className="mt-1 flex flex-wrap gap-2">

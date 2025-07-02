@@ -1,30 +1,56 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
+const NAV = [
+  {
+    name: "Home",
+    url: "/",
+  },
+  {
+    name: "blog",
+    url: "/blog",
+  },
+];
+
 function Header() {
   const router = useRouter();
-  const isActive = (path: string) => router.pathname === path;
+  const isActive = (path: string) => {
+    if (path === "/blog") {
+      return (
+        router.pathname === "/blog" || router.pathname.startsWith("/blog/")
+      );
+    }
+    return router.pathname === path;
+  };
 
   return (
     <header className="container mx-auto max-w-2xl px-4">
       <nav className="text-md mb-20 mt-8 flex w-full items-center justify-between ">
         <ul className="flex gap-2 text-slate-400">
-          <li>
-            <Link
-              href="/"
-              id="/"
-              className={`${
-                isActive("/") ? "text-slate-50" : ""
-              } cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2`}
-            >
-              Home
-            </Link>
-          </li>
-          {/* <li>
-            <span className="text-slate-400" aria-label="Separator">
-              /
-            </span>
-          </li> */}
+          {NAV.map((item, index) => {
+            return (
+              <div key={item.name} className="flex">
+                <li>
+                  <Link
+                    href={item.url}
+                    id={item.url}
+                    className={`${
+                      isActive(item.url) ? "text-slate-50" : ""
+                    } cursor-pointer rounded-lg p-1 transition duration-300 ease-out hover:bg-slate-800 md:px-3 md:py-2`}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+                {index < NAV.length - 1 && (
+                  <li className={`${item} `}>
+                    <span className="text-slate-400" aria-label="Separator">
+                      /
+                    </span>
+                  </li>
+                )}
+              </div>
+            );
+          })}
         </ul>
 
         <div>

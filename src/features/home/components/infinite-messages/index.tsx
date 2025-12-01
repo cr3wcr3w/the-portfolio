@@ -2,46 +2,25 @@ import styles from "./message.module.css";
 
 const messages = [
   {
-    text: "typecsript",
+    text: "✥♦︎✥",
   },
   {
-    text: "react",
+    text: "✥♦︎✥",
   },
   {
-    text: "next",
+    text: "✥♦︎✥",
   },
   {
-    text: "tailwind",
+    text: "✥♦︎✥",
   },
   {
-    text: "gsap",
+    text: "✥♦︎✥",
   },
   {
-    text: "express",
+    text: "✥♦︎✥",
   },
   {
-    text: "hono",
-  },
-  {
-    text: "drizzle",
-  },
-  {
-    text: "postgres",
-  },
-  {
-    text: "docker",
-  },
-  {
-    text: "terraform",
-  },
-  {
-    text: "digitalOcean",
-  },
-  {
-    text: "linux",
-  },
-  {
-    text: "postman",
+    text: "✥♦︎✥",
   },
 ];
 

@@ -97,10 +97,10 @@ function Hero() {
             Kenneth Racelis
           </h1>
           <p className="mb-4 text-lg text-slate-200 md:text-xl">
-            Frontend Developer
+            Currently completing my degree
           </p>
           <p className="text-slate-400 text-pretty ">
-            I&apos;m into coding, Always learning something new.
+            Just exploring tech and learning things as I go.
           </p>
         </div>
       </section>

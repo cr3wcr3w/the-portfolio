@@ -2,25 +2,31 @@ import styles from "./message.module.css";
 
 const messages = [
   {
-    text: "✥♦︎✥",
+    text: "🌐",
   },
   {
-    text: "✥♦︎✥",
+    text: "🌐",
   },
   {
-    text: "✥♦︎✥",
+    text: "🌐",
   },
   {
-    text: "✥♦︎✥",
+    text: "🌐",
   },
   {
-    text: "✥♦︎✥",
+    text: "🌐",
   },
   {
-    text: "✥♦︎✥",
+    text: "🌐",
   },
   {
-    text: "✥♦︎✥",
+    text: "🌐",
+  },
+  {
+    text: "🌐",
+  },
+  {
+    text: "🌐",
   },
 ];
 

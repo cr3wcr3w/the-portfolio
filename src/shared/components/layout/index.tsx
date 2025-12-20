@@ -75,12 +75,12 @@ function Layout({ children }: { children: React.ReactNode }) {
 
       {!isLoadingRendered ? (
         <LoadingMessage
-          introText={"Just someone who enjoys exploring technology."}
-          mainText={
-            "I'm interested in web development, music, linux, and networking"
+          introText={
+            "Passionate about building and maintaining reliable systems."
           }
-          closingText={"Always open to learning something new."}
-          sloganText={"♪♪♪"}
+          mainText={"Interested in networking and system administration."}
+          closingText={"Always learning how things connect."}
+          sloganText={"🌐"}
           toggleIsFirstRender={toggleIsFirstRender}
         />
       ) : (

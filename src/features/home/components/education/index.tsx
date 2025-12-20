@@ -16,15 +16,15 @@ const mockEduData = [
     cert: "",
     isPresent: false,
   },
-  {
-    name: "KodeGo",
-    startDate: "", // Nov 2022
-    endDate: "", // Mar 2023
-    description: "FullStack Development Bootcamp",
-    // cert: "https://assets.kodego.ph/public/isa/tQtx2B19J47h1VVVNMva3vL4mivpnSR5EMZLLQt8.pdf",
-    cert: "https://drive.google.com/file/d/1XrFK5GVvjtCODmvSfAJw2PnM9NDV8_9U/view?usp=sharing",
-    isPresent: false,
-  },
+  // {
+  //   name: "KodeGo",
+  //   startDate: "", // Nov 2022
+  //   endDate: "", // Mar 2023
+  //   description: "FullStack Development Bootcamp",
+  //   // cert: "https://assets.kodego.ph/public/isa/tQtx2B19J47h1VVVNMva3vL4mivpnSR5EMZLLQt8.pdf",
+  //   cert: "https://drive.google.com/file/d/1XrFK5GVvjtCODmvSfAJw2PnM9NDV8_9U/view?usp=sharing",
+  //   isPresent: false,
+  // },
 ];
 
 export function EduList() {

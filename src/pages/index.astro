@@ -1,0 +1,346 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="archive-page">
+			<div class="archive-heading">
+				<p class="eyebrow"><span aria-hidden="true">✳</span> Filed from the desk</p>
+				<div class="archive-title-row">
+					<h1>Stories from the archive</h1>
+					<p>{posts.length} {posts.length === 1 ? 'story' : 'stories'} &amp; counting</p>
+				</div>
+				<p class="archive-intro">
+					Notes on software, networks, cybersecurity, and what I’m learning along the way.
+				</p>
+			</div>
+
+			{posts.length > 0 ? (
+				<section class="story-grid" aria-label="All stories">
+					{posts.map((post, index) => (
+						<article class:list={['story-card', { 'story-card--lead': index === 0 }]}>
+							{post.data.heroImage && (
+								<div class="story-image" aria-hidden="true">
+									<Image
+										width={index === 0 ? 1200 : 720}
+										height={index === 0 ? 675 : 405}
+										src={post.data.heroImage}
+										alt=""
+										loading={index === 0 ? 'eager' : 'lazy'}
+									/>
+								</div>
+							)}
+							<div class="story-copy">
+								<p class="story-date"><FormattedDate date={post.data.pubDate} /></p>
+								<h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+								<p class="story-description">{post.data.description}</p>
+								<a class="story-link" href={`/blog/${post.id}/`}>
+									Read story <span aria-hidden="true">→</span>
+								</a>
+							</div>
+						</article>
+					))}
+				</section>
+			) : (
+				<p class="empty-state">No stories have been published yet. Check back soon.</p>
+			)}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.archive-page {
+		position: relative;
+		width: min(1120px, calc(100% - 4rem));
+		max-width: none;
+		padding: 2.4rem 0 1rem;
+		background-image:
+			linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), rgba(201, 197, 187, 0.3) 100%),
+			radial-gradient(rgba(158, 41, 41, 0.09) 0.75px, transparent 1px);
+		background-position: right top, right 0.2rem top 0.2rem;
+		background-size: 100% 100%, 8px 8px;
+		background-repeat: no-repeat, no-repeat;
+	}
+	.archive-heading {
+		position: relative;
+		padding-bottom: 1.5rem;
+		border-bottom: 3px double var(--ink);
+		animation: print-in 550ms ease-out both;
+	}
+	.eyebrow,
+	.story-date {
+		margin: 0;
+		color: var(--accent);
+		font-family: var(--mono);
+		font-size: 0.67rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+	.eyebrow span {
+		display: inline-block;
+		margin-right: 0.35rem;
+		color: var(--ink);
+		font-size: 0.9rem;
+	}
+	.archive-title-row {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-top: 0.25rem;
+	}
+	.archive-title-row h1 {
+		margin: 0;
+		font-size: clamp(3rem, 8vw, 6rem);
+		letter-spacing: -0.07em;
+		line-height: 1;
+	}
+	.archive-title-row p,
+	.archive-intro {
+		color: var(--muted);
+		font-family: var(--mono);
+		font-size: 0.68rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+	.archive-intro {
+		margin: 0.75rem 0 0;
+		font-family: var(--serif);
+		font-size: 1.05rem;
+		letter-spacing: 0;
+		text-transform: none;
+	}
+	.story-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		column-gap: 1.4rem;
+	}
+	.story-card {
+		position: relative;
+		isolation: isolate;
+		display: flex;
+		flex-direction: column;
+		padding: 1.2rem 0 1.4rem;
+		border-bottom: 1px solid var(--rule);
+		transition:
+			translate 180ms ease,
+			background-color 180ms ease,
+			box-shadow 180ms ease;
+		animation: print-in 500ms ease-out both;
+	}
+	.story-card::before {
+		position: absolute;
+		z-index: -1;
+		top: 0.8rem;
+		bottom: 0.8rem;
+		left: -0.65rem;
+		width: 2px;
+		background: var(--accent);
+		content: '';
+		transform: scaleY(0);
+		transform-origin: bottom;
+		transition: transform 180ms ease;
+	}
+	.story-card:nth-child(2) {
+		animation-delay: 50ms;
+	}
+	.story-card:nth-child(3) {
+		animation-delay: 100ms;
+	}
+	.story-card:nth-child(4) {
+		animation-delay: 150ms;
+	}
+	.story-card:nth-child(5) {
+		animation-delay: 200ms;
+	}
+	.story-card:nth-child(6) {
+		animation-delay: 250ms;
+	}
+	.story-card:hover,
+	.story-card:focus-within {
+		background-color: rgba(235, 231, 221, 0.58);
+		box-shadow: 0 1px 0 var(--rule);
+		translate: 0 -3px;
+	}
+	.story-card:hover::before,
+	.story-card:focus-within::before {
+		transform: scaleY(1);
+	}
+	.story-card--lead {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: 1.2fr 0.8fr;
+		gap: 2rem;
+		align-items: center;
+		padding-top: 1.5rem;
+		padding-bottom: 1.7rem;
+		border-bottom: 3px double var(--ink);
+	}
+	.story-card--lead::before {
+		top: 1.4rem;
+		bottom: 1.4rem;
+		left: -0.8rem;
+		width: 3px;
+	}
+	.story-image {
+		display: block;
+		overflow: hidden;
+		aspect-ratio: 16 / 9;
+		background: var(--paper-deep);
+	}
+	.story-image img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: grayscale(1);
+		mix-blend-mode: multiply;
+		transition:
+			transform 280ms ease,
+			filter 280ms ease;
+	}
+	.story-card:hover .story-image img,
+	.story-card:focus-within .story-image img {
+		filter: grayscale(0.65) contrast(1.08);
+		transform: scale(1.035);
+	}
+	.story-copy {
+		padding-top: 0.9rem;
+	}
+	.story-card--lead .story-copy {
+		padding-top: 0;
+	}
+	.story-date {
+		margin-bottom: 0.45rem;
+		color: var(--muted);
+	}
+	.story-card h2 {
+		margin: 0 0 0.45rem;
+		font-size: 1.4rem;
+		letter-spacing: -0.035em;
+	}
+	.story-card--lead h2 {
+		font-size: clamp(2rem, 3.8vw, 3.5rem);
+		line-height: 1.03;
+	}
+	.story-card h2 a {
+		text-decoration: none;
+		text-decoration-color: var(--accent);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.12em;
+		transition:
+			color 160ms ease,
+			text-decoration-color 160ms ease;
+	}
+	.story-card h2 a:hover,
+	.story-card h2 a:focus-visible {
+		color: var(--accent);
+		text-decoration: underline;
+	}
+	.story-description {
+		margin: 0 0 0.8rem;
+		color: var(--muted);
+		font-size: 0.8rem;
+		line-height: 1.5;
+	}
+	.story-card--lead .story-description {
+		font-family: var(--serif);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+	.story-link {
+		align-self: flex-start;
+		color: var(--accent);
+		font-family: var(--mono);
+		font-size: 0.65rem;
+		font-weight: 700;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	.story-link span {
+		padding-left: 0.2rem;
+		transition: padding-left 160ms ease;
+	}
+	.story-card:hover .story-link span,
+	.story-card:focus-within .story-link span {
+		padding-left: 0.55rem;
+	}
+	@keyframes print-in {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	.empty-state {
+		padding: 3rem 0;
+		color: var(--muted);
+	}
+	@media (max-width: 760px) {
+		.archive-page {
+			width: calc(100% - 2rem);
+			padding-top: 1.5rem;
+		}
+		.story-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.story-card--lead {
+			gap: 1.2rem;
+		}
+	}
+	@media (max-width: 560px) {
+		.archive-title-row {
+			align-items: flex-end;
+		}
+		.archive-title-row p {
+			max-width: 6rem;
+			text-align: right;
+		}
+		.story-grid {
+			grid-template-columns: 1fr;
+		}
+		.story-card--lead {
+			grid-column: auto;
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.archive-heading,
+		.story-card {
+			animation: none;
+		}
+		.story-card,
+		.story-card::before,
+		.story-card h2 a,
+		.story-link span,
+		.story-image img {
+			transition: none;
+		}
+		.story-card:hover,
+		.story-card:focus-within {
+			translate: none;
+		}
+	}
+</style>

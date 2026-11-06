@@ -1,0 +1,90 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+
+const today = new Intl.DateTimeFormat('en-US', {
+	weekday: 'long',
+	month: 'long',
+	day: 'numeric',
+	year: 'numeric',
+}).format(new Date());
+---
+
+<header>
+	<div class="topline">
+		<span>Personal journal · software · cybersecurity</span>
+		<time>{today}</time>
+	</div>
+	<a class="masthead" href="/">{SITE_TITLE}</a>
+	<nav aria-label="Main navigation">
+		<div class="internal-links">
+			<HeaderLink href="/">The archive</HeaderLink>
+			<HeaderLink href="/about">About</HeaderLink>
+		</div>
+	</nav>
+</header>
+
+<style>
+	header {
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		color: var(--ink);
+	}
+	.topline {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.65rem 0;
+		border-bottom: 1px solid var(--rule);
+		color: var(--muted);
+		font-family: var(--mono);
+		font-size: 0.65rem;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+	.masthead {
+		display: block;
+		padding: 0.45rem 0 0.6rem;
+		border-bottom: 3px double var(--ink);
+		color: var(--ink);
+		font-family: var(--serif);
+		font-size: clamp(2.6rem, 8vw, 5.8rem);
+		font-weight: 700;
+		letter-spacing: -0.07em;
+		line-height: 1;
+		text-align: center;
+		text-decoration: none;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-height: 3.25rem;
+		border-bottom: 1px solid var(--ink);
+	}
+	.internal-links {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+	@media (max-width: 600px) {
+		header {
+			padding: 0 1rem;
+		}
+		.topline {
+			font-size: 0.55rem;
+		}
+		.internal-links {
+			gap: 0.8rem;
+		}
+	}
+	@media (max-width: 380px) {
+		.topline span {
+			max-width: 12rem;
+		}
+		.internal-links {
+			gap: 0.5rem;
+		}
+	}
+</style>

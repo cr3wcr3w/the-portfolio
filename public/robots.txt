@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Allow: /blog/
-Sitemap: https://astro-k3ndev.vercel.app/sitemap.xml

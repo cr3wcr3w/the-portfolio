@@ -1,0 +1,252 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../assets/me.png';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main class="about-page">
+			<div class="about-top">
+				<div class="about-heading">
+					<p class="eyebrow">About the author</p>
+					<h1>Learning by building and breaking things.</h1>
+					<p class="intro">
+						I’m a Network and Cybersecurity student exploring how software is made—and how to
+						make it more secure.
+					</p>
+				</div>
+				<figure class="portrait">
+					<Image
+						src={portrait}
+						width={500}
+						height={500}
+						alt="Portrait of Kenneth Racelis"
+						class="portrait-image"
+						loading="eager"
+					/>
+					<figcaption>JK Racelis · Student</figcaption>
+				</figure>
+			</div>
+			<hr />
+			<div class="about-copy">
+				<p>
+					I’m currently finishing my <strong>Bachelor of Science in Information Technology,
+					majoring in Network and Cybersecurity</strong> at Mapúa Malayan Digital College.
+				</p>
+				<p>
+					Outside my studies, I’m exploring the Rust, JavaScript, and TypeScript ecosystems and
+					sharpening my security mindset through capture-the-flag (CTF) challenges. I use this
+					site as my personal portfolio and blog—a place to document what I’m learning, share
+					projects, and follow ideas I find worth exploring.
+				</p>
+			</div>
+			<div class="about-links">
+				<p class="social-heading">Elsewhere on the internet</p>
+				<a href="https://github.com/cr3wcr3w" target="_blank" rel="me noopener noreferrer">
+					GitHub <span aria-hidden="true">↗</span>
+				</a>
+				<a href="https://anilist.co/user/cr3wcr3w/" target="_blank" rel="me noopener noreferrer">
+					AniList <span aria-hidden="true">↗</span>
+				</a>
+				<a
+					href="https://www.linkedin.com/in/jkenneth-racelis/"
+					target="_blank"
+					rel="me noopener noreferrer"
+				>
+					LinkedIn <span aria-hidden="true">↗</span>
+				</a>
+				<a href="https://x.com/cr3w_cr3w" target="_blank" rel="me noopener noreferrer">
+					X <span aria-hidden="true">↗</span>
+				</a>
+				<a href="mailto:racelisjk@gmail.com">racelisjk@gmail.com <span aria-hidden="true">↗</span></a>
+			</div>
+			<a class="archive-link" href="/">Browse the archive <span aria-hidden="true">→</span></a>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.about-page {
+		width: min(1000px, calc(100% - 4rem));
+		max-width: none;
+		padding: 4rem 0 2rem;
+	}
+	.about-top {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 270px;
+		gap: 2rem;
+		align-items: center;
+	}
+	.about-heading {
+		max-width: 650px;
+	}
+	.portrait {
+		position: relative;
+		z-index: 0;
+		margin: 0;
+		padding: 0.5rem 0.5rem 2.15rem;
+		border: 1px solid var(--rule);
+		background: var(--paper);
+		box-shadow:
+			0 0 0 5px var(--paper),
+			0 0 0 6px var(--rule),
+			8px 10px 0 var(--paper-deep);
+		transform: rotate(1deg);
+		transition:
+			transform 180ms ease,
+			box-shadow 180ms ease;
+	}
+	.portrait::before {
+		position: absolute;
+		z-index: -1;
+		top: -1.1rem;
+		right: -1.25rem;
+		width: 5.5rem;
+		height: 5.5rem;
+		background-image: radial-gradient(var(--accent) 1px, transparent 1.3px);
+		background-size: 7px 7px;
+		content: '';
+		opacity: 0.42;
+	}
+	.portrait::after {
+		position: absolute;
+		top: -0.75rem;
+		right: -0.75rem;
+		width: 1.5rem;
+		height: 1.5rem;
+		border-top: 1px solid var(--accent);
+		border-right: 1px solid var(--accent);
+		content: '';
+	}
+	.portrait:hover {
+		box-shadow:
+			0 0 0 5px var(--paper),
+			0 0 0 6px var(--rule),
+			10px 12px 0 var(--paper-deep);
+		transform: rotate(0) translateY(-2px);
+	}
+	.portrait-image {
+		display: block;
+		width: 100%;
+		aspect-ratio: 1;
+		object-fit: cover;
+		object-position: center 38%;
+		filter: grayscale(0.82) contrast(1.04);
+	}
+	.portrait figcaption {
+		padding: 0.55rem 0.2rem 0.1rem;
+		color: var(--muted);
+		font-family: var(--mono);
+		font-size: 0.59rem;
+		letter-spacing: 0.04em;
+		text-align: right;
+		text-transform: uppercase;
+	}
+	.eyebrow {
+		margin: 0 0 1rem;
+		color: var(--accent);
+		font-family: var(--mono);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+	h1 {
+		max-width: 13ch;
+		margin: 0 0 1.2rem;
+		font-size: clamp(3rem, 8vw, 6rem);
+		letter-spacing: -0.07em;
+		line-height: 0.97;
+	}
+	.intro {
+		max-width: 650px;
+		color: #414141;
+		font-family: var(--serif);
+		font-size: clamp(1.2rem, 2.5vw, 1.55rem);
+		line-height: 1.45;
+	}
+	hr {
+		margin: 2rem 0;
+		border-top: 3px double var(--ink);
+	}
+	.about-copy {
+		max-width: 620px;
+		font-size: 0.95rem;
+		line-height: 1.8;
+	}
+	.social-heading {
+		grid-column: 1 / -1;
+		margin: 0 0 0.15rem;
+		color: var(--muted);
+		font-family: var(--mono);
+		font-size: 0.66rem;
+		font-weight: 700;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+	}
+	.archive-link {
+		display: inline-block;
+		margin-top: 0.5rem;
+		padding-bottom: 0.2rem;
+		border-bottom: 1px solid var(--accent);
+		color: var(--accent);
+		font-size: 0.8rem;
+		font-weight: 700;
+		text-decoration: none;
+	}
+	.about-links {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.75rem 2rem;
+		max-width: 620px;
+		margin-top: 2rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--rule);
+	}
+	.about-links > a {
+		color: var(--accent);
+		font-size: 0.84rem;
+		text-decoration: none;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
+	}
+	.about-links > a:hover {
+		text-decoration: underline;
+	}
+	.archive-link {
+		margin-top: 1.4rem;
+	}
+	@media (max-width: 600px) {
+		.about-page {
+			width: calc(100% - 2rem);
+			padding-top: 2.5rem;
+		}
+		.about-top {
+			grid-template-columns: 1fr;
+			gap: 0;
+		}
+		.portrait {
+			width: min(100%, 300px);
+			margin: 0 auto;
+		}
+		.about-links {
+			grid-template-columns: 1fr;
+			gap: 0.9rem;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.portrait {
+			transition: none;
+		}
+	}
+</style>

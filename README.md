@@ -1,40 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# The archive
 
-## Getting Started
+A personal portfolio and blog built with Astro. The site has an editorial-style
+story archive at `/`, article pages under `/blog/`, and an About page at
+`/about/`.
 
-First, run the development server:
+## Requirements
 
-```bash
+- Node.js `>=22.23.4`
+- npm
+
+## Run locally
+
+From the project directory:
+
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the local URL printed by Astro (by default, `http://localhost:4321`).
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+To make and preview a production build:
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```sh
+npm run build
+npm run preview
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+The generated static site is written to `dist/`.
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Add a blog post
 
-## Learn More
+1. Create a Markdown file in `src/content/blog/`. Its filename becomes the post
+   URL slug. For example, `rust-notes.md` is published at
+   `/blog/rust-notes/`.
+2. Add the required frontmatter at the very top of the file:
 
-To learn more about Next.js, take a look at the following resources:
+   ```md
+   ---
+   title: "A title for the post"
+   description: "A short summary shown in the archive and search previews."
+   pubDate: "11/06/2026"
+   heroImage: ""
+   ---
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+   Use `MM/DD/YYYY` for `pubDate`. Every post needs all four fields. Set
+   `heroImage` to `""` when there is no image.
+3. Write the article below the closing `---` using Markdown. Headings, links,
+   lists, images, quotes, and fenced code blocks are supported.
+4. To add a hero image, put it in `src/assets/` and use a path relative to the
+   post file. For example, a file in `src/content/blog/` can use:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```md
+   heroImage: "../../assets/my-hero-image.jpg"
+   ```
 
-## Deploy on Vercel
+Posts are sorted by publication date on the archive. Astro creates the article
+route from the Markdown filename; no separate route or registration is needed.
+Run `npm run build` to validate the content and generate the site.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project map
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+```text
+src/
+├── assets/           # Images and fonts
+├── components/       # Shared Astro components
+├── content/blog/     # Markdown and MDX posts
+├── layouts/          # Shared page layouts, including article pages
+├── pages/            # Routes: archive, About, and blog articles
+└── styles/           # Global newspaper-inspired styles
+```
+
+## RSS
+
+The feed is available at `/rss.xml`.

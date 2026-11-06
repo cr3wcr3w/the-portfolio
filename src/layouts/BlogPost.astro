@@ -1,0 +1,287 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+
+type StoryLink = { id: string; title: string };
+type Props = CollectionEntry<'blog'>['data'] & {
+	newerPost?: StoryLink;
+	olderPost?: StoryLink;
+};
+
+const { title, description, pubDate, updatedDate, heroImage, newerPost, olderPost } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} — ${SITE_TITLE}`} description={description} />
+	</head>
+	<body>
+		<Header />
+		<main class="article-shell" transition:animate="fade">
+			<article>
+				<header class="article-header">
+					<p class="eyebrow">From the journal <span aria-hidden="true">/</span> <FormattedDate date={pubDate} /></p>
+					<h1>{title}</h1>
+					<p class="dek">{description}</p>
+					{updatedDate && (
+						<p class="updated-date">
+							Updated <FormattedDate date={updatedDate} />
+						</p>
+					)}
+				</header>
+				{heroImage && (
+					<figure class="hero-image">
+						<Image width={1200} height={675} src={heroImage} alt="" fetchpriority="high" />
+					</figure>
+				)}
+				<div class="prose">
+					<slot />
+				</div>
+				<nav class="article-nav" aria-label="Article navigation">
+					{newerPost ? (
+						<a class="story-jump story-jump--newer" href={`/blog/${newerPost.id}/`}>
+							<span>← Newer story</span>
+							<strong>{newerPost.title}</strong>
+						</a>
+					) : <span class="story-jump-placeholder" aria-hidden="true"></span>}
+					<a class="archive-return" href="/">Back to the archive</a>
+					{olderPost ? (
+						<a class="story-jump story-jump--older" href={`/blog/${olderPost.id}/`}>
+							<span>Older story →</span>
+							<strong>{olderPost.title}</strong>
+						</a>
+					) : <span class="story-jump-placeholder" aria-hidden="true"></span>}
+				</nav>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.article-shell {
+		width: min(1120px, calc(100% - 4rem));
+		max-width: none;
+		padding: 2rem 0 1rem;
+	}
+	.article-header {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 0.6rem 0 1.8rem;
+		text-align: center;
+	}
+	.eyebrow {
+		margin: 0 0 1rem;
+		color: var(--accent);
+		font-family: var(--mono);
+		font-size: 0.67rem;
+		font-weight: 700;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+	}
+	.eyebrow span {
+		padding: 0 0.4rem;
+		color: var(--rule);
+	}
+	.article-header h1 {
+		margin: 0 auto 1rem;
+		font-size: clamp(2.7rem, 7vw, 5.7rem);
+		letter-spacing: -0.065em;
+		line-height: 0.98;
+	}
+	.dek {
+		max-width: 700px;
+		margin: 0 auto;
+		color: #4a4a4a;
+		font-family: var(--serif);
+		font-size: clamp(1.05rem, 2vw, 1.35rem);
+		line-height: 1.45;
+	}
+	.updated-date {
+		margin: 0.7rem 0 0;
+		color: var(--muted);
+		font-family: var(--mono);
+		font-size: 0.65rem;
+		text-transform: uppercase;
+	}
+	.hero-image {
+		margin: 0 auto 2.5rem;
+		overflow: hidden;
+		background: var(--paper-deep);
+		aspect-ratio: 16 / 9;
+	}
+	.hero-image :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: grayscale(1);
+		mix-blend-mode: multiply;
+	}
+	.prose {
+		max-width: 700px;
+		margin: 0 auto;
+		color: #303030;
+		font-size: 1rem;
+		line-height: 1.8;
+	}
+	.prose :global(p) {
+		margin: 0 0 1.5rem;
+	}
+	.prose :global(h2) {
+		margin: 2.5rem 0 0.75rem;
+		padding-top: 1rem;
+		border-top: 1px solid var(--rule);
+		font-size: 1.8rem;
+		letter-spacing: -0.035em;
+	}
+	.prose :global(h3) {
+		margin: 2rem 0 0.6rem;
+		font-size: 1.35rem;
+	}
+	.prose :global(a) {
+		color: var(--accent);
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
+	}
+	.prose :global(img) {
+		display: block;
+		margin: 2rem auto;
+	}
+	.prose :global(blockquote) {
+		margin: 2rem 0;
+		padding: 0.2rem 0 0.2rem 1.25rem;
+		color: var(--muted);
+		font-family: var(--serif);
+	}
+	.prose :global(pre) {
+		overflow-x: auto;
+		border: 1px solid var(--rule);
+		background: var(--paper-deep);
+		font-size: 0.78rem;
+		line-height: 1.5;
+	}
+	.prose :global(table) {
+		display: block;
+		width: max-content;
+		min-width: 100%;
+		max-width: 100%;
+		margin: 1.8rem 0 2.2rem;
+		overflow-x: auto;
+		border-top: 2px solid var(--ink);
+		border-bottom: 2px solid var(--ink);
+		border-collapse: collapse;
+		background: rgba(255, 255, 255, 0.3);
+		font-size: 0.82rem;
+		line-height: 1.5;
+	}
+	.prose :global(th),
+	.prose :global(td) {
+		min-width: 7rem;
+		padding: 0.65rem 0.8rem;
+		border-right: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+		text-align: left;
+		vertical-align: top;
+	}
+	.prose :global(th) {
+		background: var(--paper-deep);
+		color: var(--ink);
+		font-family: var(--mono);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.035em;
+	}
+	.prose :global(th:last-child),
+	.prose :global(td:last-child) {
+		border-right: 0;
+	}
+	.prose :global(tbody tr:nth-child(even) td) {
+		background: rgba(235, 231, 221, 0.68);
+	}
+	.prose :global(tbody tr:last-child td) {
+		border-bottom: 0;
+	}
+	.prose :global(ul),
+	.prose :global(ol) {
+		padding-left: 1.3rem;
+	}
+	.prose :global(li) {
+		margin-bottom: 0.45rem;
+	}
+	.article-nav {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+		align-items: center;
+		gap: 1rem;
+		max-width: 700px;
+		margin: 3rem auto 0;
+		padding-top: 1rem;
+		border-top: 1px solid var(--ink);
+	}
+	.article-nav a {
+		color: var(--accent);
+		font-family: var(--mono);
+		font-size: 0.65rem;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	.story-jump {
+		display: grid;
+		gap: 0.25rem;
+	}
+	.story-jump span {
+		color: var(--muted);
+	}
+	.story-jump strong {
+		color: var(--ink);
+		font-family: var(--serif);
+		font-size: 0.85rem;
+		font-weight: 700;
+		letter-spacing: 0;
+		text-transform: none;
+		transition: color 160ms ease;
+	}
+	.story-jump:hover strong {
+		color: var(--accent);
+	}
+	.story-jump--older {
+		text-align: right;
+	}
+	.archive-return {
+		white-space: nowrap;
+	}
+	.story-jump-placeholder {
+		min-width: 1px;
+	}
+	@media (max-width: 760px) {
+		.article-shell {
+			width: calc(100% - 2rem);
+			padding-top: 1.3rem;
+		}
+		.hero-image {
+			margin-bottom: 1.5rem;
+		}
+		.article-nav {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.archive-return {
+			grid-column: 1 / -1;
+			grid-row: 1;
+		}
+		.story-jump-placeholder {
+			display: none;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.story-jump strong {
+			transition: none;
+		}
+	}
+</style>
